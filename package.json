@@ -1,18 +1,11 @@
 {
   "name": "medical-inventory",
   "version": "1.0.0",
-  "description": "Club Ambassadeurs VESOS - Medical Inventory Management",
+  "description": "Medical Inventory - Club Ambassadeurs VESOS",
   "scripts": {
-    "dev": "netlify dev",
-    "build": "echo 'No build step required'"
+    "dev": "netlify dev"
   },
-  "keywords": ["medical", "inventory", "healthcare"],
-  "author": "Club Ambassadeurs VESOS",
-  "license": "MIT",
   "dependencies": {
-    "pg": "^8.11.3"
-  },
-  "devDependencies": {
-    "netlify-cli": "^17.10.1"
+    "@neondatabase/serverless": "^0.9.0"
   }
 }
