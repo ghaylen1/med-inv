@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Médical - Club Ambassadeurs VESOS</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                </div>
+                <div class="brand">
+                    <h1>Club Ambassadeurs VESOS</h1>
+                    <span>Gestion du Stock Médical</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-header" id="addProductBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                    <span>Ajouter</span>
+                </button>
+                <button class="btn-header" id="exportBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                    <span>Export</span>
+                </button>
+                <button class="btn-theme" id="themeToggle" title="Changer le thème">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="main">
+        <!-- Stats -->
+        <section class="stats">
+            <div class="stat-card" style="--delay: 0">
+                <div class="stat-icon blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statTotal">0</span>
+                    <span class="stat-label">Total Produits</span>
+                </div>
+            </div>
+            <div class="stat-card" style="--delay: 1">
+                <div class="stat-icon green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statInStock">0</span>
+                    <span class="stat-label">En Stock</span>
+                </div>
+            </div>
+            <div class="stat-card" style="--delay: 2">
+                <div class="stat-icon orange">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statLow">0</span>
+                    <span class="stat-label">Stock Faible</span>
+                </div>
+            </div>
+            <div class="stat-card" style="--delay: 3">
+                <div class="stat-icon red">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statOut">0</span>
+                    <span class="stat-label">Rupture</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls -->
+        <section class="controls">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+                <button class="clear-btn" id="clearSearch">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="medical">Médical</button>
+                <button class="filter-btn" data-filter="hygiene">Hygiène</button>
+                <button class="filter-btn" data-filter="logistics">Logistique</button>
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2>Inventaire</h2>
+                <span id="productCount">0 produits</span>
+            </div>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Chargement...</p>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="empty-state" id="emptyState">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
+                <h3>Aucun produit trouvé</h3>
+                <p>Modifiez vos filtres ou ajoutez un produit</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <button class="modal-close" data-close="detailModal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="modal-body">
+                <div class="detail-header" id="detailHeader"></div>
+                <div class="detail-content" id="detailContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="btnDelete">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                    Supprimer
+                </button>
+                <button class="btn btn-primary" id="btnEdit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                    </svg>
+                    Modifier
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Modal -->
+    <div class="modal-overlay" id="formModal">
+        <div class="modal modal-lg">
+            <button class="modal-close" data-close="formModal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2 id="formTitle">Ajouter un produit</h2>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="formId">
+                    <div class="form-group">
+                        <label>Nom du produit *</label>
+                        <input type="text" id="formName" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Catégorie *</label>
+                            <select id="formCategory" required>
+                                <option value="medical">Matériel Médical</option>
+                                <option value="hygiene">Hygiène</option>
+                                <option value="logistics">Logistique</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantité *</label>
+                            <input type="number" id="formQuantity" min="0" value="0" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Unité</label>
+                            <input type="text" id="formUnit" placeholder="Ex: 500g">
+                        </div>
+                        <div class="form-group">
+                            <label>Marque</label>
+                            <input type="text" id="formBrand">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <input type="text" id="formType">
+                    </div>
+                    <div class="form-group">
+                        <label>Partenaire</label>
+                        <input type="text" id="formPartner">
+                    </div>
+                    <div class="form-group">
+                        <label>Remarques</label>
+                        <textarea id="formRemarks" rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="formModal">Annuler</button>
+                <button class="btn btn-primary" id="formSubmit">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quantity Modal -->
+    <div class="modal-overlay" id="qtyModal">
+        <div class="modal modal-sm">
+            <button class="modal-close" data-close="qtyModal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2>Modifier quantité</h2>
+            </div>
+            <div class="modal-body">
+                <p class="qty-product-name" id="qtyName"></p>
+                <div class="qty-controls">
+                    <button class="qty-btn" id="qtyMinus">−</button>
+                    <input type="number" id="qtyInput" min="0">
+                    <button class="qty-btn" id="qtyPlus">+</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="qtyModal">Annuler</button>
+                <button class="btn btn-primary" id="qtySave">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Club Ambassadeurs VESOS</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
